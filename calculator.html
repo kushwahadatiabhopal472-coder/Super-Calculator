@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Super Calculator</title>
+    
+    <!-- 🎨 यहाँ से CSS (स्टाइल) शुरू होती है -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a; /* डार्क बैकग्राउंड */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            background-color: #1e293b;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.4);
+            width: 320px;
+            border: 1px solid #334155;
+        }
+
+        #screen {
+            width: 92%;
+            height: 60px;
+            background-color: #0f172a;
+            color: #38bdf8; /* नियॉन ब्लू स्क्रीन */
+            border: 1px solid #334155;
+            font-size: 28px;
+            text-align: right;
+            padding: 5px 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 18px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            background-color: #334155;
+            color: #f8fafc;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #475569;
+        }
+
+        .clear { background-color: #ef4444; } /* लाल बटन */
+        .clear:hover { background-color: #dc2626; }
+
+        .operator { background-color: #f59e0b; color: #fff; } /* संतरा बटन */
+        .operator:hover { background-color: #d97706; }
+
+        .equal {
+            background-color: #10b981; /* हरा बटन */
+            grid-row: span 2;
+            height: 100%;
+        }
+        .equal:hover { background-color: #059669; }
+    </style>
+</head>
+<body>
+
+    <!-- 🧱 यहाँ कैलकुलेटर का HTML ढांचा है -->
+    <div class="calculator">
+        <input type="text" id="screen" placeholder="0" readonly>
+        
+        <div class="buttons">
+            <button class="btn clear" onclick="clearScreen()">C</button>
+            <button class="btn operator" onclick="press('/')">÷</button>
+            <button class="btn operator" onclick="press('*')">×</button>
+            <button class="btn operator" onclick="press('-')">-</button>
+            
+            <button class="btn" onclick="press('7')">7</button>
+            <button class="btn" onclick="press('8')">8</button>
+            <button class="btn" onclick="press('9')">9</button>
+            <button class="btn operator" onclick="press('+')">+</button>
+            
+            <button class="btn" onclick="press('4')">4</button>
+            <button class="btn" onclick="press('5')">5</button>
+            <button class="btn" onclick="press('6')">6</button>
+            <button class="btn equal" onclick="calculate()">=</button>
+            
+            <button class="btn" onclick="press('1')">1</button>
+            <button class="btn" onclick="press('2')">2</button>
+            <button class="btn" onclick="press('3')">3</button>
+            <button class="btn" onclick="press('0')">0</button>
+        </div>
+    </div>
+
+    <!-- ⚡ यहाँ से JavaScript (दिमाग) शुरू होती है -->
+    <script>
+        let screen = document.getElementById('screen');
+
+        function press(value) {
+            if (screen.value === "0" || screen.value === "Error") {
+                screen.value = value;
+            } else {
+                screen.value += value;
+            }
+        }
+
+        function clearScreen() {
+            screen.value = "";
+        }
+
+        function calculate() {
+            try {
+                if (screen.value !== "") {
+                    screen.value = eval(screen.value);
+                }
+            } catch (error) {
+                screen.value = "Error";
+            }
+        }
+    </script>
+</body>
+</html>
